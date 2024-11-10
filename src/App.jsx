@@ -1,7 +1,7 @@
 function App() {
   return (
     <>
-      <h1>This is a pokedex project</h1>
+      <h1 className="text-3xl underline">This is a pokedex project</h1>
     </>
   );
 }
