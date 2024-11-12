@@ -7,7 +7,7 @@ export default function PokemonCard(props) {
     <>
  
    
-      <div className=" mx-2.5 box-border h-72 w-72 border-4 rounded-xl		 ">
+      <div className="  box-border h-72 w-72 border-4 rounded-xl		 ">
         <p className="text-center	text-slate-500">#{id}</p>
         <div className="flex justify-center	my-6">
         <div  className="  h-1/2 w-1/2 "> 

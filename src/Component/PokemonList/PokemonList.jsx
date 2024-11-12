@@ -6,7 +6,7 @@ export default function PokemonList() {
   const { pokemonList } = usePokemonList();
 
   return (
-    <div className="flex flex-wrap gap-4	">
+    <div className="flex flex-wrap gap-4 justify-center	">
       {pokemonList.map((pokemonInfo) => (
        
         <PokemonCard key={pokemonInfo.id} pokemonInfo={pokemonInfo} />
