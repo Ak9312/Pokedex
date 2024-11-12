@@ -7,8 +7,8 @@ export default function PokemonList() {
 
   return (
     <div>
-      {pokemonList.map((pokemonInfo, index) => (
-        <PokemonCard key={index} pokemonInfo={pokemonInfo} />
+      {pokemonList.map((pokemonInfo) => (
+        <PokemonCard key={pokemonInfo.id} pokemonInfo={pokemonInfo} />
       ))}
     </div>
   );
