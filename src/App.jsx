@@ -3,7 +3,7 @@ import { POKEMON_MAIN_API } from "./API/constants";
 import PokemonList from "./Component/PokemonList/PokemonList";
 import usePokemonList from "./Hooks/usePokemonList";
 
-const LIMIT = 150;
+const LIMIT = 151;
 const OFFSET = 0;
 
 function App() {
@@ -19,7 +19,20 @@ function App() {
   useEffect(() => {
     const fetchAllPokemonData = async () => {
       const pokemonApiResponse = await getAllPokemonData();
-      setPokemonList(pokemonApiResponse);
+      const pokemonDetails = [];
+      for (const index in pokemonApiResponse) {
+        const currPokemon = {
+          id: parseInt(index) + 1,
+          name: pokemonApiResponse[index]["name"],
+          url: pokemonApiResponse[index]["url"],
+          thumbnail: `https://raw.githubusercontent.com/pokeapi/sprites/master/sprites/pokemon/other/dream-world/${
+            parseInt(index) + 1
+          }.svg`,
+        };
+        pokemonDetails.push(currPokemon);
+      }
+
+      setPokemonList(pokemonDetails);
     };
 
     fetchAllPokemonData();
