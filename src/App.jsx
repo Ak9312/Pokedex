@@ -2,12 +2,14 @@ import { useEffect } from "react";
 import { POKEMON_MAIN_API } from "./API/constants";
 import PokemonList from "./Component/PokemonList/PokemonList";
 import usePokemonList from "./Hooks/usePokemonList";
+import usePokemonFilteredList from "./Hooks/usePokemonFilteredList";
 
 const LIMIT = 151;
 const OFFSET = 0;
 
 function App() {
   const { setPokemonList } = usePokemonList();
+  const { setFilteredPokemonList } = usePokemonFilteredList();
 
   const getAllPokemonData = async () => {
     const response = await fetch(
@@ -33,10 +35,12 @@ function App() {
       }
 
       setPokemonList(pokemonDetails);
+
+      setFilteredPokemonList(pokemonDetails);
     };
 
     fetchAllPokemonData();
-  }, [setPokemonList]);
+  }, [setPokemonList, setFilteredPokemonList]);
 
   return (
     <>
