@@ -12,7 +12,7 @@ export default function PokemonList() {
         Result (
         <span className="text-red-500">{filteredPokemonList.length}</span>)
       </div>
-      <div className="flex flex-wrap gap-4 justify-center">
+      <div className="flex flex-wrap gap-4 justify-center ">
         {filteredPokemonList.map((pokemonInfo) => (
           <PokemonCard key={pokemonInfo.id} pokemonInfo={pokemonInfo} />
         ))}

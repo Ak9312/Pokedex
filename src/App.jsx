@@ -3,6 +3,7 @@ import { POKEMON_MAIN_API } from "./API/constants";
 import PokemonList from "./Component/PokemonList/PokemonList";
 import usePokemonList from "./Hooks/usePokemonList";
 import usePokemonFilteredList from "./Hooks/usePokemonFilteredList";
+import PokemonControlBar from "./Component/PokemonControlBar/PokemonControlBar";
 
 const LIMIT = 151;
 const OFFSET = 0;
@@ -44,6 +45,7 @@ function App() {
 
   return (
     <>
+      <PokemonControlBar />
       <PokemonList />
     </>
   );

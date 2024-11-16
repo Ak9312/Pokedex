@@ -9,7 +9,7 @@ createRoot(document.getElementById("root")).render(
   <StrictMode>
     <PokemonListProvider>
       <PokemonFilteredListContext>
-      <App />
+        <App />
       </PokemonFilteredListContext>
     </PokemonListProvider>
   </StrictMode>
