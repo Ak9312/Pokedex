@@ -1,8 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import usePokemonFilteredList from "../../Hooks/usePokemonFilteredList";
+import usePokemonList from "../../Hooks/usePokemonList";
 
 export default function PokemonControlBar() {
+  const { filteredPokemonList, setFilteredPokemonList } =
+    usePokemonFilteredList();
+  const { pokemonList } = usePokemonList();
+  const [sortOption, setSortOption] = useState("");
+
+  const sortByNameHandler = () => {
+    const totalPokemons = pokemonList;
+    const sortedPokemons = [...totalPokemons].sort((a, b) => {
+      if (a.name < b.name) return -1;
+      if (a.name > b.name) return 1;
+      return 0;
+    });
+    setFilteredPokemonList(sortedPokemons);
+  };
+
+  const sortByIdHandler = () => {
+    setFilteredPokemonList(pokemonList);
+  };
+
+  const handleSortChange = (event) => {
+    const selectedOption = event.target.value;
+    setSortOption(selectedOption);
+
+    if (selectedOption === "Name") {
+      sortByNameHandler();
+    } else if (selectedOption === "Id") {
+      sortByIdHandler();
+    }
+  };
+
   return (
     <>
       <div className="flex flex-col my-6 mx-10 	 justify-center ">
@@ -17,10 +49,8 @@ export default function PokemonControlBar() {
           </button>
         </div>
         <div className="flex flex-col sm:flex-row gap-4 sm:gap-x-10 justify-center my-10">
+          <label>Select by : </label>
           <select className="w-full sm:w-full md:w-4/12 border-4 rounded-xl text-left bg-gray-100 px-2 cursor-pointer">
-            <option className="bg-gray-300 text-black p-2 rounded   ">
-              Select By
-            </option>
             <option className="bg-gray-300 text-black p-2 rounded   ">
               Captured
             </option>
@@ -28,14 +58,19 @@ export default function PokemonControlBar() {
               Not Captured
             </option>
           </select>
-          <select className="w-full sm:w-full md:w-4/12 border-4 rounded-xl text-left bg-gray-100 px-2 cursor-pointer">
+          <label>Sort by : </label>
+          <select
+            className="w-full sm:w-full md:w-4/12 border-4 rounded-xl text-left bg-gray-100 px-2 cursor-pointer"
+            onChange={handleSortChange}
+            value={sortOption}
+            placeholder="Sort by"
+          >
             <option className="bg-gray-300 text-black p-2 rounded   ">
-              Sort By
+              Id
             </option>
-            <option className="bg-gray-300 text-black p-2 rounded   ">
+            <option className="bg-gray-300 text-black p-2 rounded ">
               Name
             </option>
-            <option className="bg-gray-300 text-black p-2 rounded ">Id</option>
           </select>
         </div>
       </div>
