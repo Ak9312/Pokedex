@@ -4,6 +4,7 @@ import PokemonList from "./Component/PokemonList/PokemonList";
 import usePokemonList from "./Hooks/usePokemonList";
 import usePokemonFilteredList from "./Hooks/usePokemonFilteredList";
 import PokemonControlBar from "./Component/PokemonControlBar/PokemonControlBar";
+import PokeBanner from "./Component/PokeBanner/PokeBanner";
 
 const LIMIT = 151;
 const OFFSET = 0;
@@ -45,6 +46,7 @@ function App() {
 
   return (
     <>
+      <PokeBanner />
       <PokemonControlBar />
       <PokemonList />
     </>
