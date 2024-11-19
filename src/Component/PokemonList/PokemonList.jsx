@@ -1,5 +1,4 @@
 import React from "react";
-import usePokemonList from "../../Hooks/usePokemonList";
 import PokemonCard from "../PokemonCard/PokemonCard";
 import usePokemonFilteredList from "../../Hooks/usePokemonFilteredList";
 
@@ -12,6 +11,7 @@ export default function PokemonList() {
         Result (
         <span className="text-red-500">{filteredPokemonList.length}</span>)
       </div>
+      {filteredPokemonList.length === 0 && <p className="flex justify-center">No pokemon found!</p>}
       <div className="flex flex-wrap gap-4 justify-center ">
         {filteredPokemonList.map((pokemonInfo) => (
           <PokemonCard key={pokemonInfo.id} pokemonInfo={pokemonInfo} />
