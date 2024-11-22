@@ -15,7 +15,7 @@ export default function PokemonCard(props) {
           </div>
         </div>
         <p className="text-center text-3xl	 font-bold capitalize">{name}</p>
-        <PokemonCaptureToggle />
+        <PokemonCaptureToggle pokemonId={id} pokemonName={name} />
       </div>
     </>
   );

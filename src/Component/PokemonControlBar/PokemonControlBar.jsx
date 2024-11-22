@@ -38,14 +38,14 @@ export default function PokemonControlBar() {
     } else if (selectedOption === "Id") {
       sortByIdHandler();
     }
-    setSearchQuery("")
+    setSearchQuery("");
   };
 
   // Debounce implementation for search
   useEffect(() => {
     const handler = setTimeout(() => {
       setDebouncedQuery(searchQuery);
-    }, DEBOUNCE_DELAY); // Set debounce delay to 100ms
+    }, DEBOUNCE_DELAY);
 
     return () => {
       clearTimeout(handler); // Clean up timeout on component unmount or searchQuery change
