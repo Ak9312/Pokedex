@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import usePokemonFilteredList from "../../Hooks/usePokemonFilteredList";
 import usePokemonList from "../../Hooks/usePokemonList";
+import useCapturedPokemons from "../../Hooks/useCapturedPokemons";
 
 const DEBOUNCE_DELAY = 300;
 
@@ -11,6 +12,21 @@ export default function PokemonControlBar() {
   const [sortOption, setSortOption] = useState("");
   const [searchQuery, setSearchQuery] = useState(""); // For storing search input
   const [debouncedQuery, setDebouncedQuery] = useState(""); // For storing the debounced search query
+  const { isCaptured } = useCapturedPokemons();
+
+  // Handle filter by captured
+  const filterByCapturedHandler = (filterType) => {
+    const filteredPokemons = pokemonList.filter((pokemon) => {
+      if (filterType === "Captured") {
+        return isCaptured(pokemon.id); // Check if the Pokémon is captured
+      } else if (filterType === "Not Captured") {
+        return !isCaptured(pokemon.id); // Check if the Pokémon is not captured
+      }
+      return true; // Return all if filterType is 'All'
+    });
+    // Update the filtered list
+    setFilteredPokemonList(filteredPokemons);
+  };
 
   // Handle sorting by name
   const sortByNameHandler = () => {
@@ -72,12 +88,15 @@ export default function PokemonControlBar() {
             className="w-full sm:w-full md:w-1/2 border-4 rounded-xl text-left bg-gray-100 px-2"
             placeholder="Search pokemon by name"
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)} // Update searchQuery on input change
+            onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
         <div className="flex flex-col sm:flex-row gap-4 sm:gap-x-10 justify-center my-10">
           <label>Select by : </label>
-          <select className="w-full sm:w-full md:w-4/12 border-4 rounded-xl text-left bg-gray-100 px-2 cursor-pointer">
+          <select
+            className="w-full sm:w-full md:w-4/12 border-4 rounded-xl text-left bg-gray-100 px-2 cursor-pointer"
+            onChange={(e) => filterByCapturedHandler(e.target.value)}
+          >
             <option className="bg-gray-300 text-black p-2 rounded">All</option>
             <option className="bg-gray-300 text-black p-2 rounded">
               Captured

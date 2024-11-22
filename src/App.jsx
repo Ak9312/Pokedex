@@ -9,7 +9,7 @@ import PokeBanner from "./Component/PokeBanner/PokeBanner";
 const LIMIT = 151;
 const OFFSET = 0;
 
-function App() {
+function App() {  
   const { setPokemonList } = usePokemonList();
   const { setFilteredPokemonList } = usePokemonFilteredList();
 

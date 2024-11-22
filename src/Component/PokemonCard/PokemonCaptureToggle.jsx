@@ -5,7 +5,7 @@ import useCapturedPokemons from "../../Hooks/useCapturedPokemons";
 
 export default function PokemonCaptureToggle(props) {
   const { pokemonName, pokemonId } = props;
-  const [capturedPokemons, addCapturedPokemon, removeCapturedPokemon] =
+  const { capturedPokemons, addCapturedPokemon, removeCapturedPokemon } =
     useCapturedPokemons();
   const [currentCaptured, setCurrentCaptured] = useState(false);
 

@@ -67,6 +67,19 @@ export default function useCapturedPokemons() {
     setCapturedPokemons(newCapturedPokemons);
   };
 
+  // Function to check if a Pokémon is captured by its ID
+  const isCaptured = (pokemonId) => {
+    // Retrieve the list from localStorage and check if the Pokémon ID exists
+    const storedPokemons = localStorage.getItem("pokemon_captured_list");
+    const currentPokemons = storedPokemons ? JSON.parse(storedPokemons) : [];
+    return currentPokemons.some((pokemon) => pokemon.pokemonId === pokemonId);
+  };
+
   // Return the list of captured Pokémon and the functions to add and remove Pokémon
-  return [capturedPokemons, addCapturedPokemon, removeCapturedPokemon];
+  return {
+    capturedPokemons,
+    addCapturedPokemon,
+    removeCapturedPokemon,
+    isCaptured,
+  };
 }
