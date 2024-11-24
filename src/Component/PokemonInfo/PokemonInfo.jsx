@@ -2,10 +2,12 @@ import React, { useEffect, useState, useRef } from "react";
 import { createPortal } from "react-dom";
 import { pokemonTypeColorScheme } from "../../utilities/PokemonTypeColorScheme";
 import ProgressBar from "./ProgressBar";
+import PokemonPic from "./PokemonPic";
 // import { pokemonTypeColorScheme } from "./pokemonTypeColorScheme"; // Import the color scheme
 
 export default function PokemonInfo({ modalOpen, onClose, name, url }) {
-  pokemonTypeColorScheme;
+  // Stats Info.
+  const statsInfo = ["hp", "attack", "defense", "special-attack"];
   const modalRef = useRef(null);
 
   // State to manage the data, loading, and error states
@@ -68,16 +70,17 @@ export default function PokemonInfo({ modalOpen, onClose, name, url }) {
           {pokemonDetails && !loading && !error && (
             <div className="w-full">
               <div className="flex flex-col items-center space-y-2 mb-6">
-                <h2 className="text-gray-600 text-lg">
+                <PokemonPic pokemondetails={pokemonDetails} />
+                <h2 className="text-gray-600 text-sm">
                   Height: {pokemonDetails.height}
                 </h2>
-                <h2 className="text-gray-600 text-lg">
+                <h2 className="text-gray-600 text-sm">
                   Weight: {pokemonDetails.weight}
                 </h2>
-                <h2 className="text-gray-600 text-lg">Abilities:</h2>
+                <h2 className="text-gray-600 text-sm">Abilities:</h2>
                 <ul className="space-y-1">
                   {pokemonDetails.abilities.map((ability, index) => (
-                    <li key={index} className="text-gray-600 text-lg">
+                    <li key={index} className="text-gray-600 text-sm">
                       {ability.ability.name}
                     </li>
                   ))}
@@ -105,7 +108,7 @@ export default function PokemonInfo({ modalOpen, onClose, name, url }) {
               {/* Stats */}
               <p className="font-bold text-lg text-center mb-2">Base Stats</p>
               <div className="w-full">
-                {["hp", "attack", "defense", "special-attack"].map((stat) => {
+                {statsInfo.map((stat) => {
                   const statValue =
                     pokemonDetails.stats.find((s) => s.stat.name === stat)
                       ?.base_stat || 0;
