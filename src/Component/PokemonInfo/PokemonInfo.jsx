@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { createPortal } from "react-dom";
 import { pokemonTypeColorScheme } from "../../utilities/PokemonTypeColorScheme";
+import ProgressBar from "./ProgressBar";
 // import { pokemonTypeColorScheme } from "./pokemonTypeColorScheme"; // Import the color scheme
 
 export default function PokemonInfo({ modalOpen, onClose, name, url }) {
@@ -90,7 +91,6 @@ export default function PokemonInfo({ modalOpen, onClose, name, url }) {
                     bg: "bg-gray-500", // Default to gray if type is not found
                     text: "text-white",
                   };
-
                   return (
                     <p
                       key={index}
@@ -105,34 +105,21 @@ export default function PokemonInfo({ modalOpen, onClose, name, url }) {
               {/* Stats */}
               <p className="font-bold text-lg text-center mb-2">Base Stats</p>
               <div className="w-full">
-                {["hp", "atk", "def", "satk"].map((stat) => (
-                  <div
-                    key={stat}
-                    className="flex items-center justify-between mb-2"
-                  >
-                    <p className="text-sm font-bold">{stat.toUpperCase()}</p>
-                    <div className="flex items-center space-x-2">
-                      <progress
-                        value={
-                          pokemonDetails.stats.find((s) => s.stat.name === stat)
-                            ?.base_stat || 0
-                        }
-                        max="100"
-                        className="w-32 h-2 rounded-lg"
-                      />
-                      <p className="text-sm">
-                        {pokemonDetails.stats.find((s) => s.stat.name === stat)
-                          ?.base_stat || 0}
-                      </p>
-                    </div>
-                  </div>
-                ))}
+                {["hp", "attack", "defense", "special-attack"].map((stat) => {
+                  const statValue =
+                    pokemonDetails.stats.find((s) => s.stat.name === stat)
+                      ?.base_stat || 0;
+                  return (
+                    <ProgressBar
+                      key={stat}
+                      value={statValue}
+                      max={100} // Assuming max value is 100
+                      label={stat.toUpperCase()}
+                      primaryType={pokemonDetails.types[0].type.name}
+                    />
+                  );
+                })}
               </div>
-
-              {/* Description */}
-              {/* <p className="text-gray-700 text-center mt-4">
-                {pokemonDetails?.flavor_text_entries[0]?.flavor_text || "No description available."}
-              </p> */}
             </div>
           )}
         </div>
