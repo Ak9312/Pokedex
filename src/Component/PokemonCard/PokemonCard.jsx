@@ -7,7 +7,7 @@ export default function PokemonCard(props) {
 
   return (
     <>
-      <div className="box-border h-80 w-72 md:w-80 border-4 rounded-xl hover:bg-cyan-50 cursor-pointer">
+      <div className="box-border h-80 w-60 md:w-80 border-4 rounded-xl hover:bg-cyan-50 cursor-pointer">
         <p className="text-center	text-slate-500">#{id}</p>
         <div className="flex justify-center	my-6">
           <div className="  h-1/2 w-1/2 ">

@@ -46,9 +46,11 @@ function App() {
 
   return (
     <>
+    <div className="mb-5">
       <PokeBanner />
       <PokemonControlBar />
       <PokemonList />
+      </div>
     </>
   );
 }
