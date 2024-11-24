@@ -1,14 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import PokemonCaptureToggle from "./PokemonCaptureToggle";
+import PokemonInfo from "../PokemonInfo/PokemonInfo";
 
 export default function PokemonCard(props) {
   const { id, name, url, thumbnail } = props.pokemonInfo;
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const handleModalOpenClick = () => setModalOpen(true);
+  const handleModalCloseClick = () => setModalOpen(false);
 
   return (
     <div className="flex justify-center items-center p-4">
       <div className="box-border h-auto w-72 md:w-80 lg:w-96 border-4 rounded-xl hover:bg-cyan-50 cursor-pointer shadow-lg">
         {/* Button */}
-        <button className="bg-red-400 text-white rounded-lg p-4 md:p-2 w-full">
+        <button
+          className="bg-red-400 text-white rounded-lg p-4 md:p-2 w-full"
+          onClick={handleModalOpenClick}
+        >
           Show info
         </button>
 
@@ -36,6 +44,14 @@ export default function PokemonCard(props) {
           <PokemonCaptureToggle pokemonId={id} pokemonName={name} />
         </div>
       </div>
+
+      {/* Modal Component */}
+      <PokemonInfo
+        modalOpen={modalOpen}
+        onClose={handleModalCloseClick}
+        name={name}
+        url={url}
+      />
     </div>
   );
 }
