@@ -78,20 +78,39 @@ export default function PokemonInfo({ modalOpen, onClose, name, url }) {
             <div className="w-full">
               <div className="flex flex-col items-center space-y-2 mb-6">
                 <PokemonPic pokemondetails={pokemonDetails} />
-                <h2 className="text-gray-600 text-sm">
-                  Height: {pokemonDetails.height}
-                </h2>
-                <h2 className="text-gray-600 text-sm">
-                  Weight: {pokemonDetails.weight}
-                </h2>
-                <h2 className="text-gray-600 text-sm">Abilities:</h2>
-                <ul className="space-y-1">
-                  {pokemonDetails.abilities.map((ability, index) => (
-                    <li key={index} className="text-gray-600 text-sm">
-                      {ability.ability.name}
-                    </li>
-                  ))}
-                </ul>
+
+                <div className="grid grid-cols-3 gap-4 w-full">
+                  {/* Height Column */}
+                  <div className="flex flex-col items-center border-r border-gray-300 pr-4">
+                    <h2 className="text-gray-400 text-xs">Height</h2>
+                    <p className="text-gray-600 text-sm md:text-lg">
+                      {parseInt(pokemonDetails.height) / 10} m
+                    </p>
+                  </div>
+
+                  {/* Weight Column */}
+                  <div className="flex flex-col items-center border-r border-gray-300 pr-4">
+                    <h2 className="text-gray-400 text-xs">Weight</h2>
+                    <p className="text-gray-600 text-sm md:text-lg">
+                      {parseInt(pokemonDetails.weight) / 10} kg
+                    </p>
+                  </div>
+
+                  {/* Abilities Column */}
+                  <div className="flex flex-col items-center">
+                    <h2 className="text-gray-400 text-xs">Abilities</h2>
+                    <ul className="space-y-1">
+                      {pokemonDetails.abilities.map((ability, index) => (
+                        <li
+                          key={index}
+                          className="text-gray-600 text-xs md:text-lg"
+                        >
+                          {ability.ability.name}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
               </div>
 
               {/* Power Type */}
@@ -113,7 +132,9 @@ export default function PokemonInfo({ modalOpen, onClose, name, url }) {
               </div>
 
               {/* Stats */}
-              <p className="font-bold text-lg text-center mb-2">Base Stats</p>
+              <p className="font-bold text-sm md:text-lg text-center mb-2">
+                Base Stats
+              </p>
               <div className="w-full">
                 {statsInfo.map((stat) => {
                   const statValue =

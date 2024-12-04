@@ -5,12 +5,12 @@ const ProgressBar = ({ value, max, label, primaryType }) => {
   const progress = Math.min((value / max) * 100, 100);
 
   // Get the theme color based on the primaryType
-  const themeColor = pokemonTypeColorScheme[primaryType].bg;
+  const themeColor = pokemonTypeColorScheme[primaryType]?.bg;
 
   return (
     <div className="w-full">
       <div className="flex items-center justify-between mb-2">
-        <p className="text-sm font-bold">{label}</p>
+        <p className="text-xs md:text-sm font-bold">{label}</p>
       </div>
       <div className={`w-full h-2  rounded-lg overflow-hidden`}>
         <div

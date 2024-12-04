@@ -17,4 +17,5 @@ export const pokemonTypeColorScheme = {
   dark: { bg: "bg-gray-600", text: "text-white" },
   steel: { bg: "bg-gray-300", text: "text-gray-800" },
   dark2: { bg: "bg-pink-300", text: "text-gray-800" },
+  fairy: { bg: "bg-rose-300", text: "text-white" },
 };
