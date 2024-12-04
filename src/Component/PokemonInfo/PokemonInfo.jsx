@@ -7,7 +7,14 @@ import PokemonPic from "./PokemonPic";
 
 export default function PokemonInfo({ modalOpen, onClose, name, url }) {
   // Stats Info.
-  const statsInfo = ["hp", "attack", "defense", "special-attack"];
+  const statsInfo = [
+    "hp",
+    "attack",
+    "defense",
+    "special-attack",
+    "special-defense",
+    "speed",
+  ];
   const modalRef = useRef(null);
 
   // State to manage the data, loading, and error states
@@ -43,7 +50,7 @@ export default function PokemonInfo({ modalOpen, onClose, name, url }) {
   return createPortal(
     <div
       className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50"
-      onClick={onClose} // Close the modal when clicking the backdrop
+      // Close the modal when clicking the backdrop
     >
       <div
         ref={modalRef}
