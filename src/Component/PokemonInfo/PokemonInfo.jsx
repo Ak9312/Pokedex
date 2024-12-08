@@ -3,6 +3,9 @@ import { createPortal } from "react-dom";
 import { pokemonTypeColorScheme } from "../../utilities/PokemonTypeColorScheme";
 import ProgressBar from "./ProgressBar";
 import PokemonPic from "./PokemonPic";
+import { VscSymbolRuler } from "react-icons/vsc";
+import { LuWeight } from "react-icons/lu";
+
 // import { pokemonTypeColorScheme } from "./pokemonTypeColorScheme"; // Import the color scheme
 
 export default function PokemonInfo({ modalOpen, onClose, name, url }) {
@@ -50,6 +53,7 @@ export default function PokemonInfo({ modalOpen, onClose, name, url }) {
   return createPortal(
     <div
       className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50"
+      onClick={onClose}
       // Close the modal when clicking the backdrop
     >
       <div
@@ -82,7 +86,11 @@ export default function PokemonInfo({ modalOpen, onClose, name, url }) {
                 <div className="grid grid-cols-3 gap-4 w-full">
                   {/* Height Column */}
                   <div className="flex flex-col items-center border-r border-gray-300 pr-4">
-                    <h2 className="text-gray-400 text-xs">Height</h2>
+                    <div className="flex gap-x-2">
+                      <h2 className="text-gray-400 text-xs">Height </h2>
+                       <VscSymbolRuler className="size-3	md:size-auto	" />
+                    </div>
+
                     <p className="text-gray-600 text-sm md:text-lg">
                       {parseInt(pokemonDetails.height) / 10} m
                     </p>
@@ -90,7 +98,10 @@ export default function PokemonInfo({ modalOpen, onClose, name, url }) {
 
                   {/* Weight Column */}
                   <div className="flex flex-col items-center border-r border-gray-300 pr-4">
-                    <h2 className="text-gray-400 text-xs">Weight</h2>
+                    <div className="flex gap-x-2">
+                      <h2 className="text-gray-400 text-xs">Weight</h2>
+                      <LuWeight className="size-3	md:size-auto	" />
+                    </div>
                     <p className="text-gray-600 text-sm md:text-lg">
                       {parseInt(pokemonDetails.weight) / 10} kg
                     </p>
