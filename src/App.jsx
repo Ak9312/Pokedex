@@ -1,15 +1,17 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { POKEMON_MAIN_API } from "./API/constants";
 import PokemonList from "./Component/PokemonList/PokemonList";
 import usePokemonList from "./Hooks/usePokemonList";
 import usePokemonFilteredList from "./Hooks/usePokemonFilteredList";
 import PokemonControlBar from "./Component/PokemonControlBar/PokemonControlBar";
 import PokeBanner from "./Component/PokeBanner/PokeBanner";
+import AppLoadingScreen from "./Component/AppLoadingScreen/AppLoadingScreen";
 
 const LIMIT = 151;
 const OFFSET = 0;
 
-function App() {  
+function App() {
+  const [loading, setLoading] = useState(true); // Add loading state
   const { setPokemonList } = usePokemonList();
   const { setFilteredPokemonList } = usePokemonFilteredList();
 
@@ -20,8 +22,10 @@ function App() {
     const data = await response.json();
     return data.results;
   };
+
   useEffect(() => {
     const fetchAllPokemonData = async () => {
+      setLoading(true); // Set loading to true when fetching starts
       const pokemonApiResponse = await getAllPokemonData();
       const pokemonDetails = [];
       for (const index in pokemonApiResponse) {
@@ -37,8 +41,8 @@ function App() {
       }
 
       setPokemonList(pokemonDetails);
-
       setFilteredPokemonList(pokemonDetails);
+      setLoading(false); // Set loading to false when data is loaded
     };
 
     fetchAllPokemonData();
@@ -46,10 +50,16 @@ function App() {
 
   return (
     <>
-    <div className="mb-5">
-      <PokeBanner />
-      <PokemonControlBar />
-      <PokemonList />
+      <div className="mb-5">
+        <PokeBanner />
+        {loading ? (
+          <AppLoadingScreen /> // Show loading screen when fetching data
+        ) : (
+          <>
+            <PokemonControlBar />
+            <PokemonList />
+          </>
+        )}
       </div>
     </>
   );

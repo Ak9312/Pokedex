@@ -5,8 +5,8 @@ import ProgressBar from "./ProgressBar";
 import PokemonPic from "./PokemonPic";
 import { VscSymbolRuler } from "react-icons/vsc";
 import { LuWeight } from "react-icons/lu";
-
-// import { pokemonTypeColorScheme } from "./pokemonTypeColorScheme"; // Import the color scheme
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 export default function PokemonInfo({ modalOpen, onClose, name, url }) {
   // Stats Info.
@@ -69,16 +69,70 @@ export default function PokemonInfo({ modalOpen, onClose, name, url }) {
           <span className="text-xl font-bold">X</span>
         </button>
 
+        {/* Loading Skeleton */}
+        {loading && (
+          <SkeletonTheme baseColor="#ff0000" highlightColor="#ff6666">
+            <div className="w-full">
+              {/* Skeleton Title */}
+              <div className="flex justify-center items-center">
+                <Skeleton height={30} width={100} className="mb-4" />
+              </div>
+
+              {/* Skeleton Grid Layout for Height, Weight, Abilities */}
+              <div className="grid grid-cols-3 gap-4 w-full">
+                {/* Height Skeleton */}
+                <div className="flex flex-col items-center border-r border-gray-300 pr-4">
+                  <Skeleton height={20} width={60} className="mb-2" />
+                  <Skeleton height={20} width={50} />
+                </div>
+
+                {/* Weight Skeleton */}
+                <div className="flex flex-col items-center border-r border-gray-300 pr-4">
+                  <Skeleton height={20} width={60} className="mb-2" />
+                  <Skeleton height={20} width={50} />
+                </div>
+
+                {/* Abilities Skeleton */}
+                <div className="flex flex-col items-center">
+                  <Skeleton height={20} width={60} className="mb-2" />
+                  <Skeleton count={3} height={20} width={60} />
+                </div>
+              </div>
+
+              {/* Skeleton Power Types */}
+              <div className="flex space-x-2 mb-6">
+                <Skeleton width={50} height={30} />
+              </div>
+
+              {/* Skeleton Stats */}
+              <p className="font-bold text-sm md:text-lg text-center mb-2">
+                Base Stats
+              </p>
+              <div className="w-full">
+                {statsInfo.map((stat, index) => (
+                  <Skeleton
+                    key={index}
+                    height={10}
+                    width="100%"
+                    className="mb-2"
+                  />
+                ))}
+              </div>
+            </div>
+          </SkeletonTheme>
+        )}        
+
         {/* Content */}
-        <div className="flex flex-col items-center justify-center w-full">
-          <h1 className="capitalize text-xl font-semibold mb-4">{name}</h1>
+        {pokemonDetails && !loading && !error && (
+          <div className="flex flex-col items-center justify-center w-full">
+            <h1 className="capitalize text-xl font-semibold mb-4">{name}</h1>
 
-          {/* Loading or error state */}
-          {loading && <p className="text-lg text-gray-600">Loading...</p>}
-          {error && <p className="text-lg text-red-500">{error}</p>}
+            {/* Loading or error state */}
 
-          {/* Show the fetched data when available */}
-          {pokemonDetails && !loading && !error && (
+            {error && <p className="text-lg text-red-500">{error}</p>}
+
+            {/* Show the fetched data when available */}
+
             <div className="w-full">
               <div className="flex flex-col items-center space-y-2 mb-6">
                 <PokemonPic pokemondetails={pokemonDetails} />
@@ -88,7 +142,7 @@ export default function PokemonInfo({ modalOpen, onClose, name, url }) {
                   <div className="flex flex-col items-center border-r border-gray-300 pr-4">
                     <div className="flex gap-x-2">
                       <h2 className="text-gray-400 text-xs">Height </h2>
-                       <VscSymbolRuler className="size-3	md:size-auto	" />
+                      <VscSymbolRuler className="size-3	md:size-auto	" />
                     </div>
 
                     <p className="text-gray-600 text-sm md:text-lg">
@@ -163,8 +217,8 @@ export default function PokemonInfo({ modalOpen, onClose, name, url }) {
                 })}
               </div>
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </div>,
     document.getElementById("modal") // Render to the body
