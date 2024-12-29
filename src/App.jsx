@@ -6,6 +6,7 @@ import usePokemonFilteredList from "./Hooks/usePokemonFilteredList";
 import PokemonControlBar from "./Component/PokemonControlBar/PokemonControlBar";
 import PokeBanner from "./Component/PokeBanner/PokeBanner";
 import AppLoadingScreen from "./Component/AppLoadingScreen/AppLoadingScreen";
+import Footer from "./Component/Footer/Footer";
 
 const LIMIT = 151;
 const OFFSET = 0;
@@ -61,6 +62,7 @@ function App() {
           </>
         )}
       </div>
+      <Footer />
     </>
   );
 }
